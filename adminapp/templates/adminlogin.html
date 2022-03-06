@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+      background-color:  lightblue !important;
+    }
+    #msform {
+        width: 400px;
+        margin: 50px auto;
+        text-align: center;
+        position: relative;
+    }
+    #msform fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 3px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        
+        box-sizing: border-box;
+        width: 80%;
+        margin: 0 10%;
+        position: absolute;
+    }
+    #msform fieldset:not(:first-of-type) {
+        display: none;
+    }
+    
+    
+      </style>
+</head>
+<body>
+    <br><br><br><br><br><br><br><br><br>
+  <form id="msform" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <h1>Admin Login</h1>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"> </span></span>
+        <input type="text" class="form-control" placeholder="email" name="admin_email">
+      </div><br>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"> </span></span>
+        <input type="password" class="form-control" placeholder="•••••••••••" name="admin_password">
+      </div>
+      <br>
+      <input type="submit" class="btn btn-success">
+
+      <p style="color:red">{{message}}</p>
+      
+    </fieldset>
+  </form>
+</body>
+</html>

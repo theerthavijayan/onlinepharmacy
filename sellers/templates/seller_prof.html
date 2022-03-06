@@ -1,0 +1,15 @@
+{% extends 'sellermaster.html' %}
+{% block content %}
+
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="">
+      <div class="media-body">
+        <h2 class="account-heading">Name:{{ user.name }}</h2>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}  
+
+{% comment %} {{ user.profile.image.url }} {% endcomment %}

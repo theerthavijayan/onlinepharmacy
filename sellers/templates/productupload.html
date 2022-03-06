@@ -1,0 +1,49 @@
+{% extends 'sellermaster.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4" style="border: 4px solid grey;">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td colspan="2">Upload your product here</td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Name</label></th>
+                        <td><input type="text" name="medname"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="">price</label></th>
+                        <td><input type="number" name="price"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">quantity</label></th>
+                        <td><input type="number" name="qty"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><textarea name="desp" id="" cols="25" rows="4">description of the medicine</textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="file" name="medimg"></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="submit">Upload</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}  

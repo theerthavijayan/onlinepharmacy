@@ -1,0 +1,26 @@
+{% extends 'adminmaster.html' %}
+
+{% block content %}
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Shop Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Approve/ Decline</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in request %}
+      <tr>
+        <th scope="row">{{i.shop_name}}</th>
+        <td>{{i.seller_email}}</td>
+        <td><a href="{% url 'update' i.id %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Approve</a>
+            <a href="{% url 'delete' i.id %}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Decline</a></td>
+      </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+
+{% endblock %}

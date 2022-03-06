@@ -1,0 +1,16 @@
+{% extends 'master.html' %}
+{% block content %}{% load static %}
+
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{% static 'profile.jpg' %}" alt="fjh">
+      <div class="media-body">
+        <h2 class="account-heading">Name:{{ user_data.name }}</h2>
+        <p>email: {{user_data.email}}</p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}  
+
+{% comment %} {{ user.profile.image.url }} {% endcomment %}

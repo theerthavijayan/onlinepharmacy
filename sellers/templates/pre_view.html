@@ -1,0 +1,29 @@
+{% extends 'sellermaster.html' %}
+{% block content %}
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Prescription</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for i in view %}
+      <th scope="row">{{i.name}}</th>
+      <td>{{i.address}}</td>
+      <td>{{i.phone}}</td>
+      <td><a href="/users/media/{{i.img}}" target="_blank"><img src="/users/media/{{i.img}}" alt="pres" width="50px" height="50px"></a></td>
+    </tr>
+      {% endfor %}
+
+  </tbody>
+</table>
+
+
+  
+  
+{% endblock %}  

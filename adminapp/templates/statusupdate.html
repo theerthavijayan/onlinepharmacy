@@ -1,0 +1,30 @@
+{% extends 'adminmaster.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-4"></div>
+<div class="col-sm-4" style="border: 5px inset grey;">
+<form id="msform" method="post" action="/update/{{sellerdata.id}}">
+    {% csrf_token %} 
+   <fieldset>
+     <h1>Approve</h1>
+     <div class="input-group input-group-lg">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-user"> </span></span>
+       <input type="text" class="form-control" placeholder="Shop name" name="shop_name" value="{{sellerdata.shop_name}}">
+     </div><br>
+     <div class="input-group input-group-lg">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"> </span></span>
+       <input type="text" class="form-control" placeholder="email" name="email" value="{{sellerdata.seller_email}}">
+     </div><br>
+     <input type="text" class="btn btn-primary" name="status" value="{{sellerdata.status}}">
+    
+     <br><br><br>
+     <input type="submit" class="btn btn-success">
+   </fieldset>
+ </form>
+</div>
+</div>
+</div>
+{% endblock %}
