@@ -1,0 +1,28 @@
+{% extends 'adminmaster.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+<table class="table table-dark" style="margin-top: 20px;text-align: center;">
+    <thead>
+      <tr>
+          <th scope="col">register id</th>
+        <th scope="col">Shop Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in total %}
+      <tr>
+          <td>{{i.id}}</td>
+        <td>{{ i.shop_name }}</td>
+        <td>{{ i.seller_email }}</td>
+        <td>{{ i.status }}</td>
+      </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+{% endblock %}

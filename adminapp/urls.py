@@ -7,4 +7,5 @@ urlpatterns = [
    path('adminlogout',views.adminlogout, name='adminlogout'),
    path('update/<int:id>',views.sellerapprove, name='update'),
    path('delete/<int:id>', views.sellerdelete, name="delete"),
+   path('totalsellers',views.totalsellers, name="totalsellers")
 ]

@@ -34,3 +34,6 @@ def sellerapprove(request,id):
         Sellers.objects.filter(id=id).update(status="active")
         return redirect('admindash')
     
+def totalsellers(request):
+    total=Sellers.objects.filter(status="active")
+    return render(request,'totalsellers.html', {'total':total})

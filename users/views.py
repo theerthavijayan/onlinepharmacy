@@ -4,6 +4,7 @@ from django.shortcuts import render,redirect
 from random import random
 from django.core.files.storage import FileSystemStorage
 from . models import *
+from sellers.models import *
 from sellers.views import *
 
 
@@ -88,8 +89,21 @@ def aboutus(request):
         return render(request, 'aboutus.html')
     return redirect('userlogin')
 
-def cart(request):
-    return render(request, 'cart.html')
+def cart(request, id):
+    # if 'user_id' in request.session: 
+        if request.method=='POST':
+            medname = request.POST['medname']
+            price = request.POST['price']
+            quantity = request.POST['qty']
+            description = request.POST['desp']
+            medimg = request.FILES['medimg']
+            Product.objects.filter(id=id).update(med_name=medname,price=price, quantity=quantity,description=description,med_img=medimg)
+        else:
+            print(id)
+            incart=Product.objects.get(id = id)
+            incart.save()
+            return render(request, 'cart.html',{'incart':incart})
+    # return redirect('userlogin')
 
 def payment(request):
     return render(request, 'payment.html')
