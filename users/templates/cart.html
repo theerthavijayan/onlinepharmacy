@@ -1,5 +1,8 @@
 {% extends 'master.html' %}
 {% block content %}{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <section class="h-100" style="background-color: #eee;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -9,18 +12,19 @@
           <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
 
         </div>
-
+        {% for incart in cartData %}
         <div class="card rounded-3 mb-4">
           <div class="card-body p-4">
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-md-2 col-lg-2 col-xl-2">
-                <img src="/users/media/{{incart.med_img}}" class="img-fluid rounded-3" alt="product">
+                <img src="/users/media/{{incart.prod.med_img}}" class="img-fluid rounded-3" alt="product">
               </div>
               <div class="col-md-3 col-lg-3 col-xl-3">
-                <h3 class="lead fw-normal mb-2">{{incart.med_name}}</h3>
-                <p><span class="text-muted">Price:{{incart.price}} </span><br><span class="text-muted">Quantity:{{incart.quantity}}
+                <h3 class="lead fw-normal mb-2">{{ incart.prod.med_name }}</h3>
+                <p><span class="text-muted">Price:{{ incart.prod.price }} </span><br><span
+                    class="text-muted">Quantity:{{ incart.quantity }}
                   </span> <br>
-                  {{incart.description}}</p>
+                  {{ incart.description }}</p>
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                 <button class="btn btn-link px-2"
@@ -28,8 +32,8 @@
                   <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="form1" min="0" name="quantity" value="2" type="number"
-                  class="form-control form-control-sm" />
+                <!-- <input id="form1" min="0" name="quantity" value="2" type="number"
+                  class="form-control form-control-sm" /> -->
 
                 <button class="btn btn-link px-2"
                   onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -37,7 +41,7 @@
                 </button>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h5 class="mb-0">RS.{{incart.price}}</h5>
+                <h5 class="mb-0">Rs{{ incart.prod.price }}</h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                 <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -45,14 +49,14 @@
             </div>
           </div>
         </div>
-
+        {% endfor %}
 
         <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
           <i class="fas fa-plus"></i>
         </button>
       </div>
       <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-        <h5 class="mb-0">{{incart.price}}</h5>
+        <h5 class="mb-0">{{ totalPrice.total__sum }}</h5>
       </div>
       <div class="col-md-1 col-lg-1 col-xl-1 text-end">
         <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -61,10 +65,12 @@
   </div>
   </div>
 
+
   <div class="card">
     <div class="card-body">
-      <button type="button" class="btn btn-secondary btn-block btn-lg"> <a href="{% url 'payment' %}"> Proceed to
-          Pay</a></button>
+      <button type="button" onclick="pay('{{totalPrice.total__sum}}')" class="btn btn-secondary btn-block btn-lg">
+        Proceed to
+        Pay</button>
     </div>
   </div>
 
@@ -72,4 +78,72 @@
   </div>
   </div>
 </section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function pay(amount) {
+    console.log(amount)
+    $.ajax({
+      url: 'payment',
+      type: 'POST',
+      data: {
+        totalAmount: amount * 100,
+      },
+      success: function (response) {
+        // alert("hii")
+        console.log("payment_id = " + response.id);
+        amount = response.amount
+        var options = {
+          "key": "rzp_test_2FkA2G8QokSw1F", // Enter the Key ID generated from the Dashboard
+          "amount": response.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          "currency": "INR",
+          "name": "Cyber_square",
+          "description": "Place order",
+          "image": "https://cs-ecom.herokuapp.com/static/images/cs_ecom_logo.png",
+          "id": "1234",
+          "order_id": response.id, //This is a sample Order ID. Pass the `id` obtained in the response of S
+          "handler": function (response) {
+
+            payment_id = response.razorpay_payment_id
+            order_id = response.razorpay_order_id
+            paymentAmount = amount
+            console.log(paymentAmount)
+            signature = response.razorpay_signature
+
+            updatePayment(orderId)
+
+          },
+          "theme": {
+            "color": "#3399cc"
+          }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.payment_id);
+        });
+        rzp1.open();
+      }
+    })
+  }
+
+  function updatePayment(orderId) {
+    $.ajax({
+      url: 'updatePayment',
+      type: 'post',
+      data: {
+
+        orderId,
+      },
+      success: function (response) {
+        alert("Your order placed successfully")
+        window.location.reload();
+      }
+    })
+  }
+
+</script>
 {% endblock %}

@@ -10,6 +10,7 @@ urlpatterns = [
    path('presview', views.viewprescription,name='presview'),
    path('product',views.prod_upload, name='product'),
    path('sellerprodview', views.prod_view,name='sellerprodview'),
+   path('sellerHome', views.sellerHome, name="sellerHome"),
 ]
 
  

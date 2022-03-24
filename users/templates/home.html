@@ -1,26 +1,51 @@
 {% extends 'master.html' %}
 {% block content %}{% load static %}
 
-{% for i in views %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <div class="container">
-  
-    <div class="row">
-      
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img src="/users/media/{{i.med_img}}" class="card-img-top" alt="product">
-                <div class="card-body">
-                  <h5 class="card-title">{{i.med_name}}</h5>
-                  <p class="card-text">{{i.description}}</p>
-                  <a href="/cart/{{i.id}}" class="btn btn-primary">Add to cart</a>
-                  <a href="{% url 'payment' %}" class="btn btn-primary">Buy Now</a>
-                </div>
-              </div>
-              
+  <div class="row">
+    {% for i in views %}
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <a href="/singleview/{{i.id}}"><img src="/users/media/{{i.med_img}}" class="card-img-top img-fluid"
+            alt="product"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{i.med_name}}</h5>
+          <p class="card-text">{{i.description}}</p>
+          <h5 class="card-title">₹ {{i.price}}</h5>
+          <button onclick="addToCart('{{i.id}}'); this.disabled=true" class="btn btn-success" id="btn1" align="center">Add to
+            cart</button>
+
+          <!-- <button class="btn btn-danger"><a href="{% url 'cart' %}"> Buy Now</a></button> -->
         </div>
+      </div>
     </div>
-    
+    {% endfor %}
+  </div>
 </div>
-{% endfor %}
+
+<script>
+  function addToCart(id) {
+
+    console.log(id)
+    $.ajax({
+      url: "addToCart",
+      method: "POST",
+      data: {
+        'pid': id,
+      },
+      success: function (result) {
+        // $("#div1").html(result);
+        // $("#btn1").prop('disabled', true)
+
+        console.log(result)
+      }
+    });
+  }
+</script>
+
+
+
 
 {% endblock %}

@@ -1,26 +1,25 @@
-
 {% extends 'master.html' %}
 {% load static %}
 {% block content %}
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="text-center" >
-    <h3>Upload your prescribtion here</h3><br><br>
+    <div class="text-center">
+        <h3>Upload your prescribtion here</h3><br><br>
 
-    <IMg src="{% static 'images/pres.jpg' %}" alt=""></IMg>
+        <IMg src="{% static 'images/pres.jpg' %}" alt=""></IMg>
         <br> <br>
-    
-    <input type="file" name="files"><br><br>
-    <label for="">Name:</label>
-    <input type="text" name="name"><br><br>
-    
-    <label for="">Phone:</label>
-    <input type="text" name="contact"><br><br>
-    <textarea name="address" id="" cols="30" rows="4" placeholder="enter your address here..."></textarea><br><br>
-    
-    <button type="submit" class="btn btn-dark">Upload</button>
-    </div>  
+
+        <input type="file" name="files"><br><br>
+        <label for="">Name:</label>
+        <input type="text" name="name"><br><br>
+
+        <label for="">Phone:</label>
+        <input type="text" name="contact"><br><br>
+        <textarea name="address" id="" cols="30" rows="4" placeholder="enter your address here..."></textarea><br><br>
+
+        <button type="submit" class="btn btn-dark">Upload</button>
+    </div>
 </form>
 
 <br><br><br><br>

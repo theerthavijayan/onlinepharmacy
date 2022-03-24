@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>sellerreg</title>
 </head>
-<body>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <style>
-    body {
-  background-color:  lightblue !important;
-}
-#msform {
-	width: 400px;
-	margin: 50px auto;
-	text-align: center;
-	position: relative;
-}
-#msform fieldset {
-	background: white;
-	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 20px 30px;
-	
-	box-sizing: border-box;
-	width: 80%;
-	margin: 0 10%;
-	position: absolute;
-}
-#msform fieldset:not(:first-of-type) {
-	display: none;
-}
+<style>
+  body {
+    background-color: lightblue !important;
+  }
 
+  #msform {
+    width: 400px;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+  }
 
-  </style>
+  #msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+    position: absolute;
+  }
+
+  #msform fieldset:not(:first-of-type) {
+    display: none;
+  }
+</style>
+</head>
+
 <body> <br><br><br><br><br><br><br><br><br>
   <form id="msform" method="post">
- {% csrf_token %} 
+    {% csrf_token %}
     <fieldset>
       <h1>Login</h1>
       <div class="input-group input-group-lg">
@@ -53,10 +56,12 @@
       </div>
       <br>
       <input type="submit" class="btn btn-success">
-      <p class="text-center text-muted mt-5 mb-0">Dont have an account? <a href="{% url 'sellerreg' %}" class="fw-bold text-body"><u>Register now</u></a></p>
+      <p class="text-center text-muted mt-5 mb-0">Dont have an account? <a href="{% url 'sellerreg' %}"
+          class="fw-bold text-body"><u>Register now</u></a></p>
       <h4 style="color: red;"> {{message}}</h4>
     </fieldset>
   </form>
+
 </body>
-</body>
+
 </html>
